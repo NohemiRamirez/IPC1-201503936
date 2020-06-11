@@ -137,7 +137,4 @@ public class ventana extends JFrame {
         JOptionPane.showMessageDialog(null, "El producto vale " + auxiliar.getValor()+", "+auxiliar.getNombre());
 
     }
-
-
-
 }
