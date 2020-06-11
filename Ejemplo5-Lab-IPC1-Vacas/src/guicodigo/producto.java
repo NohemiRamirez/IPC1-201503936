@@ -46,4 +46,5 @@ public class producto {
     public String getNombre() {
         return nombre;
     }
+    
 }

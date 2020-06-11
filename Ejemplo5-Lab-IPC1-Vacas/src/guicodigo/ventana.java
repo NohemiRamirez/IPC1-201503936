@@ -8,14 +8,17 @@ package guicodigo;
 import gui.repuesto;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -43,6 +46,8 @@ public class ventana extends JFrame {
         JButton btnDetalle = utiles.CrearBoton("Ver detalle producto", 200, 35);
         //------------ Combo box ---------------------------
         JComboBox cmbDatos = new JComboBox();
+        cmbDatos.addItem(new producto("Producto prueba", "1000.0"));
+        cmbDatos.setRenderer(new MyObjectListCellRenderer());
 
         //-------------- TXT Carga -----------------
         JTextArea txtCarga = new JTextArea("");
@@ -84,11 +89,11 @@ public class ventana extends JFrame {
                 ActualizarComboBox(cmbDatos);
             }
         });
-          btnDetalle.addActionListener(new ActionListener() {
+        btnDetalle.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                 consultarPrecio(cmbDatos);
+                consultarPrecio(cmbDatos);
             }
         });
         cmbDatos.setPreferredSize(new Dimension(200, 35));
@@ -131,24 +136,41 @@ public class ventana extends JFrame {
     }
 
     public void consultarPrecio(JComboBox combo) {
-        JOptionPane.showMessageDialog(null, "El producto vale "+ obtenerPrecio_nombre(combo.getSelectedItem().toString()));
+    //    JOptionPane.showMessageDialog(null, "El producto vale " + obtenerPrecio_nombre(combo.getSelectedItem().toString()));
+        JOptionPane.showMessageDialog(null, "El producto vale " + ((producto)combo.getSelectedItem()).getValor());
+
     }
-    
-    public double obtenerPrecio_correlativo(int no){
+
+    public double obtenerPrecio_correlativo(int no) {
         return inventario[no].getValor();
     }
-    
-     public double obtenerPrecio_nombre(String nombre){
-       for (int i = 0; i < 50; i++) {
+
+    public double obtenerPrecio_nombre(String nombre) {
+        for (int i = 0; i < 50; i++) {
             if (inventario[i] != null) {
                 producto temporal = inventario[i];
-                if(temporal.getNombre().equals(nombre)){
+                if (temporal.getNombre().equals(nombre)) {
                     return temporal.getValor();
                 }
             }
         }
-       return 0.0;
+        return 0.0;
     }
 
+     //---
+    class MyObjectListCellRenderer extends DefaultListCellRenderer {
 
+        public Component getListCellRendererComponent(
+                JList list,
+                Object value,
+                int index,
+                boolean isSelected,
+                boolean cellHasFocus) {
+            if (value instanceof producto) {
+                value = ((producto) value).resumen();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
+    }
 }
