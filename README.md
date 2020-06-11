@@ -1,6 +1,4 @@
-<a href="#"><img src="https://www.itprotoday.com/sites/itprotoday.com/files/styles/article_featured_retina/public/java-logo.png?itok=zBtyY02v" title="FVCproductions" alt="java"></a>
-
-<a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQHp9cavzIoijsTlLhW0xkChq8xKMvKQQLscjti6Ya8FunxYDkV&usqp=CAU" title="FVCproductions" alt="java"></a>
+<a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQHp9cavzIoijsTlLhW0xkChq8xKMvKQQLscjti6Ya8FunxYDkV&usqp=CAU" alt="java"></a>
 
 # Curso Kubernetes
 
