@@ -46,9 +46,6 @@ public class ventana extends JFrame {
         JButton btnDetalle = utiles.CrearBoton("Ver detalle producto", 200, 35);
         //------------ Combo box ---------------------------
         JComboBox cmbDatos = new JComboBox();
-        cmbDatos.addItem(new producto("Producto prueba", "1000.0"));
-        cmbDatos.setRenderer(new MyObjectListCellRenderer());
-
         //-------------- TXT Carga -----------------
         JTextArea txtCarga = new JTextArea("");
         txtCarga.setPreferredSize(new Dimension(200, 50));
@@ -130,47 +127,14 @@ public class ventana extends JFrame {
         combo.removeAllItems();
         for (int i = 0; i < 50; i++) {
             if (inventario[i] != null) {
-                combo.addItem(inventario[i].resumen());
+                combo.addItem(inventario[i]);
             }
         }
     }
 
     public void consultarPrecio(JComboBox combo) {
-    //    JOptionPane.showMessageDialog(null, "El producto vale " + obtenerPrecio_nombre(combo.getSelectedItem().toString()));
-        JOptionPane.showMessageDialog(null, "El producto vale " + ((producto)combo.getSelectedItem()).getValor());
+        producto auxiliar = (producto)combo.getSelectedItem();
+        JOptionPane.showMessageDialog(null, "El producto vale " + auxiliar.getValor()+", "+auxiliar.getNombre());
 
-    }
-
-    public double obtenerPrecio_correlativo(int no) {
-        return inventario[no].getValor();
-    }
-
-    public double obtenerPrecio_nombre(String nombre) {
-        for (int i = 0; i < 50; i++) {
-            if (inventario[i] != null) {
-                producto temporal = inventario[i];
-                if (temporal.getNombre().equals(nombre)) {
-                    return temporal.getValor();
-                }
-            }
-        }
-        return 0.0;
-    }
-
-     //---
-    class MyObjectListCellRenderer extends DefaultListCellRenderer {
-
-        public Component getListCellRendererComponent(
-                JList list,
-                Object value,
-                int index,
-                boolean isSelected,
-                boolean cellHasFocus) {
-            if (value instanceof producto) {
-                value = ((producto) value).resumen();
-            }
-            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            return this;
-        }
     }
 }
